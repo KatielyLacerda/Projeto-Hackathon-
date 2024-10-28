@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React, { useState } from "react";
+import TelaInicial from "./teleinicial";
+import Chat from "./chat";
+import "./App.css";
+import logo from "./logo.png"; // Importando a logo
 
 function App() {
+  const [role, setRole] = useState(null);
+
+  const handleRoleSelect = (selectedRole) => {
+    setRole(selectedRole);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <>
+      <header className="app-header">
+        <img src={logo} alt="Logo" className="app-logo" />
       </header>
-    </div>
+      <div className="App">
+        {!role ? (
+          <TelaInicial onRoleSelect={handleRoleSelect} />
+        ) : (
+          <Chat role={role} />
+        )}
+      </div>
+    </>
   );
 }
 
